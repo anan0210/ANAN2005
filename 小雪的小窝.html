@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❄️小雪の梦幻小屋❄️</title>
+    <style>
+        :root {
+            --main-color: #ff9edf;
+            --bg-color: #fff5fb;
+            --box-shadow: 0 4px 12px rgba(255, 158, 223, 0.2);
+            --border-color-1: #e6a8d7;
+            --border-color-2: #d291bc;
+            --border-color-3: #c37b9e;
+        }
+
+        body {
+            font-family: 'Zpix', 'PixelMplus', sans-serif;
+            background: linear-gradient(135deg, #fff5fb 0%, #ffe6f4 100%);
+            color: #6b4a5e;
+            margin: 0;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 飘落樱花动画 */
+        @keyframes fall {
+            0% { transform: translateY(-10%); opacity: 0; }
+            100% { transform: translateY(110vh); opacity: 1; }
+        }
+
+        .sakura {
+            position: absolute;
+            top: -10%;
+            font-size: 24px;
+            animation: fall linear infinite;
+            color: #ff9edf;
+        }
+
+        /* 首页样式 */
+        #page1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .heart-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            border: 4px solid var(--border-color-1);
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .heart {
+            font-size: 4em;
+            color: #e63946;
+            animation: heartbeat 1s infinite;
+            cursor: pointer;
+        }
+
+        /* 第二页样式 */
+        #page2 {
+            display: none;
+            padding: 20px;
+            background: var(--bg-color);
+            height: 100vh;
+            overflow-y: auto; /* 启用垂直滚动条 */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .main-column { display: grid; gap: 20px; }
+        .side-column { display: grid; gap: 20px; align-content: start; }
+
+        .box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            border: 4px solid var(--border-color-2);
+            transition: transform 0.3s;
+        }
+
+        /* 动画效果 */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 功能区块样式 */
+        .todo-list { list-style: "🌸 "; padding-left: 25px; }
+        .todo-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid var(--border-color-3);
+        }
+
+        #countdown {
+            font-size: 1.5em;
+            color: #ff6bcb;
+            text-align: center;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            border: 2px solid var(--border-color-1);
+        }
+
+        .cute-button {
+            background: var(--main-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .cute-button:hover {
+            background: #ff6bcb;
+            transform: scale(1.05);
+        }
+
+        .notes-display {
+            height: 200px;
+            overflow-y: auto;
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color-2);
+        }
+
+        .cute-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--main-color);
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .note {
+            margin: 10px 0;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            border: 2px solid var(--border-color-3);
+        }
+    </style>
+</head>
+<body>
+    <!-- 飘落樱花 -->
+    <div id="sakura-container"></div>
+
+    <!-- 首页 -->
+    <div id="page1">
+        <div class="heart-box">
+            <h1>❄️ 小雪の专属小窝 ⌯'Ⱉ'⌯💜💜💜</h1>
+            <p>你系窝の整个世界鸭～以后也要一起创造美好回忆哦！(✧ω✧)</p >
+            <div class="heart" onclick="showMessage()">💜</div>
+            <p>这个页面是专门为小雪准备の数字礼物哟～要一直开心呐！(≧∇≦)ﾉ</p >
+            <button class="cute-button" onclick="showMessage()">点我康康惊喜！</button>
+        </div>
+    </div>
+
+    <!-- 功能页 -->
+    <div id="page2">
+        <div class="container">
+            <div class="main-column">
+                <div class="box">
+                    <h1 class="title">欢迎光临小雪の网站 (✧∇✧)╯</h1>
+                </div>
+
+                <div class="box todo-box">
+                    <h2>📝 每日待办填写区</h2>
+                    <input type="text" class="cute-input" placeholder="今天要做什么呢～( •̀ ω •́ )✧" id="todoInput">
+                    <button class="cute-button" onclick="addTodo()">添加任务</button>
+                </div>
+
+                <div class="box todo-box">
+                    <h2>🌸 今日任务清单</h2>
+                    <ul class="todo-list" id="todoList"></ul>
+                </div>
+
+                <div class="box">
+                    <h2>📌 便签填写区</h2>
+                    <textarea class="cute-input" rows="3" placeholder="写点甜甜的话给小雪吧～(ﾉ>ω<)ﾉ" id="noteInput"></textarea>
+                    <button class="cute-button" onclick="saveNote()">保存便签</button>
+                </div>
+            </div>
+
+            <div class="side-column">
+                <div class="box hug-button">
+                    <h2>🤗 抱一抱按钮</h2>
+                    <button class="cute-button" onclick="hug()">点击抱抱 (っ´▽`)っ</button>
+                </div>
+
+                <div class="box">
+                    <h2>🎁 神秘礼物</h2>
+                    <button class="cute-button" onclick="showGift()">点击打开 (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</button>
+                </div>
+
+                <div class="box">
+                    <h2>💌 暖心便签</h2>
+                    <div class="notes-display" id="notesDisplay"></div>
+                </div>
+
+                <div class="box">
+                    <h2>⏳ 生日倒计时</h2>
+                    <div id="countdown">🎂 正在计算小雪生日...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 飘落樱花
+        function createSakura() {
+            const sakura = document.createElement('div');
+            sakura.className = 'sakura';
+            sakura.innerHTML = '🌸';
+            sakura.style.left = Math.random() * 100 + 'vw';
+            sakura.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.getElementById('sakura-container').appendChild(sakura);
+            setTimeout(() => sakura.remove(), 10000);
+        }
+
+        setInterval(createSakura, 500);
+
+        // 页面切换
+        function showMessage() {
+            const heart = document.querySelector('.heart');
+            heart.textContent = "💜 最最最喜欢小雪啦！💜";
+            setTimeout(() => {
+                document.getElementById('page1').style.display = 'none';
+                document.getElementById('page2').style.display = 'block';
+                updateCountdown();
+                loadNotes();
+            }, 5000);
+        }
+
+        // 生日倒计时
+        function updateCountdown() {
+            const targetDate = new Date(new Date().getFullYear() + 1 + '-02-10');
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').innerHTML = 
+                `🎂 还有 <strong>${days}</strong> 天就到小雪生日啦！(๑>ᴗ<๑)`;
+        }
+
+        // 待办功能
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            if (input.value.trim()) {
+                const li = document.createElement('li');
+                li.className = 'todo-item';
+                li.innerHTML = `
+                    <span>${input.value}</span>
+                    <button class="cute-button" onclick="this.parentElement.remove()">完成啦！(≧∇≦)ﾉ</button>
+                `;
+                document.getElementById('todoList').appendChild(li);
+                input.value = '';
+            }
+        }
+
+        // 便签功能
+        function saveNote() {
+            const textarea = document.getElementById('noteInput');
+            if (textarea.value.trim()) {
+                const note = document.createElement('div');
+                note.className = 'note';
+                note.innerHTML = `
+                    📄 ${textarea.value} 
+                    <small>${new Date().toLocaleDateString()}</small>
+                `;
+                document.getElementById('notesDisplay').prepend(note);
+                textarea.value = '';
+                saveNotesToLocalStorage();
+            }
+        }
+
+        // 保存便签到本地存储
+        function saveNotesToLocalStorage() {
+            const notes = document.getElementById('notesDisplay').innerHTML;
+            localStorage.setItem('snowNotes', notes);
+        }
+
+        // 加载便签
+        function loadNotes() {
+            const notes = localStorage.getItem('snowNotes');
+            if (notes) {
+                document.getElementById('notesDisplay').innerHTML = notes;
+            }
+        }
+
+        // 互动功能
+        function hug() {
+            alert("(づ｡◕‿‿◕｡)づ 小雪给你一个大大的拥抱～要开心哦！");
+        }
+
+        function showGift() {
+            alert("🎀 礼物正在路上啦～每天都要像今天一样开心哦！(๑¯◡¯๑)");
+        }
+
+        // 每5分钟更新倒计时
+        setInterval(updateCountdown, 300000);
+        updateCountdown();
+    </script>
+</body>
+</html>
+echo "# anan0210" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/anan0210/anan0210.git
+git push -u origin main
